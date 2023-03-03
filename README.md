@@ -10,7 +10,7 @@ ilovend何忠宇/男/1999
 
 技术博客：http://ilovend.github.io
 
-Github：http://github.com/ilovend ( 有原创repo的Github帐号会极大的提升你的个人品牌 )
+Github：http://github.com/ilovend
 
 期望职位：Java高级程序员，架构师
 
