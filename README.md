@@ -19,4 +19,4 @@ Github：http://github.com/ilovend ( 有原创repo的Github帐号会极大的提
 
 期望城市：上海
 
-
+<script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
