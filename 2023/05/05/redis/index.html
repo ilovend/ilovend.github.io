@@ -174,10 +174,16 @@
     
     <div class="content" v-pre>
         <p>密码Hzy1422045654<br>端口25566</p>
-<p>mkdir &#x2F;data&#x2F;docker&#x2F;redis<br>mkdir &#x2F;data&#x2F;docker&#x2F;redis&#x2F;data</p>
+<pre><code>mkdir /data/docker/redis
+mkdir /data/docker/redis/data
+</code></pre>
 <p>关闭protect-mode</p>
 <p>注释bind</p>
-<p>docker run -p 6379:6379 <br>-v &#x2F;data&#x2F;docker&#x2F;redis:&#x2F;etc&#x2F;redis <br>-v &#x2F;data&#x2F;docker&#x2F;redis&#x2F;data:&#x2F;data –name myredis <br>-d redis redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf</p>
+<pre><code>docker run -p 6379:6379 \
+-v /data/docker/redis:/etc/redis \
+-v /data/docker/redis/data:/data --name myredis \
+-d redis redis-server /etc/redis/redis.conf
+</code></pre>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/cw_hello1/article/details/83444013">Redis的bind的误区_cw_hello1的博客-CSDN博客</a></p>
 
     </div>

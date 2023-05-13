@@ -173,9 +173,21 @@
     </div>
     
     <div class="content" v-pre>
-        <p>docker run <br>-e RABBITMQ_DEFAULT_USER&#x3D;ilovend <br>-e RABBITMQ_DEFAULT_PASS&#x3D;tw.662531 <br>-v mq-plugins:&#x2F;plugins <br>–name mq <br>–hostname mq <br>-p 15672:15672 <br>-p 5672:5672 <br>-d <br>rabbitmq</p>
-<p>docker exec -it mq bash</p>
-<p>rabbitmq-plugins enable rabbitmq_management</p>
+        <pre><code>docker run \
+-e RABBITMQ_DEFAULT_USER=ilovend \
+-e RABBITMQ_DEFAULT_PASS=tw.662531 \
+-v mq-plugins:/plugins \
+--name mq \
+--hostname mq \
+-p 15672:15672 \
+-p 5672:5672 \
+-d \
+rabbitmq
+
+docker exec -it mq bash
+
+rabbitmq-plugins enable rabbitmq_management
+</code></pre>
 
     </div>
     
