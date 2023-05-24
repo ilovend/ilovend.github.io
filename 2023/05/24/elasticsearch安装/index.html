@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E9%83%A8%E7%BD%B2%E8%BF%90%E7%BB%B4/" style="color: #ffa2c4">部署运维</a>
+                <a href="/tags/%E8%BF%90%E7%BB%B4%E9%85%8D%E7%BD%AE/" style="color: #00a596">运维配置</a>
             </span>
             
         </span>
@@ -173,10 +173,10 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="elasticsearch安装"><a href="#elasticsearch安装" class="headerlink" title="elasticsearch安装"></a>elasticsearch安装</h1><h2 id="安装elasticsearch和kibana"><a href="#安装elasticsearch和kibana" class="headerlink" title="安装elasticsearch和kibana"></a>安装elasticsearch和kibana</h2><pre><code class="bash">docker pull elasticsearch:7.12.1
+        <h2 id="elasticsearch安装"><a href="#elasticsearch安装" class="headerlink" title="elasticsearch安装"></a>elasticsearch安装</h2><h3 id="安装elasticsearch和kibana"><a href="#安装elasticsearch和kibana" class="headerlink" title="安装elasticsearch和kibana"></a>安装elasticsearch和kibana</h3><pre><code class="bash">docker pull elasticsearch:7.12.1
 docker pull kibana:7.12.1
 </code></pre>
-<h2 id="启动elasticsearch"><a href="#启动elasticsearch" class="headerlink" title="启动elasticsearch"></a>启动elasticsearch</h2><pre><code class="bash">docker run -d \
+<h3 id="启动elasticsearch"><a href="#启动elasticsearch" class="headerlink" title="启动elasticsearch"></a>启动elasticsearch</h3><pre><code class="bash">docker run -d \
     --name es \
     -e &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot; \
     -e &quot;discovery.type=single-node&quot; \
@@ -188,14 +188,14 @@ docker pull kibana:7.12.1
     -p 9300:9300 \
 elasticsearch:7.12.1
 </code></pre>
-<h2 id="启动kibana"><a href="#启动kibana" class="headerlink" title="启动kibana"></a>启动kibana</h2><pre><code class="bash">docker run -d \
+<h3 id="启动kibana"><a href="#启动kibana" class="headerlink" title="启动kibana"></a>启动kibana</h3><pre><code class="bash">docker run -d \
 --name kibana \
 -e ELASTICSEARCH_HOSTS=http://es:9200 \
 --network=es-net \
 -p 5601:5601  \
 kibana:7.12.1
 </code></pre>
-<h2 id="安装ik分词器"><a href="#安装ik分词器" class="headerlink" title="安装ik分词器"></a>安装ik分词器</h2><pre><code class="bash"># 进入容器内部
+<h3 id="安装ik分词器"><a href="#安装ik分词器" class="headerlink" title="安装ik分词器"></a>安装ik分词器</h3><pre><code class="bash"># 进入容器内部
 docker exec -it elasticsearch /bin/bash
 
 # 在线下载并安装
@@ -206,6 +206,82 @@ exit
 
 #重启容器
 docker restart elasticsearch
+</code></pre>
+<h3 id="es集群搭建"><a href="#es集群搭建" class="headerlink" title="es集群搭建"></a>es集群搭建</h3><p>部署es集群可以直接使用docker-compose来完成，不过要求你的Linux虚拟机至少有<strong>4G</strong>的内存空间</p>
+<p>首先编写一个docker-compose文件，内容如下：</p>
+<pre><code class="sh">version: &#39;2.2&#39;
+services:
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    container_name: es01
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es02,es03
+      - cluster.initial_master_nodes=es01,es02,es03
+      - bootstrap.memory_lock=true
+      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+  es02:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    container_name: es02
+    environment:
+      - node.name=es02
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es01,es03
+      - cluster.initial_master_nodes=es01,es02,es03
+      - bootstrap.memory_lock=true
+      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data02:/usr/share/elasticsearch/data
+    networks:
+      - elastic
+  es03:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    container_name: es03
+    environment:
+      - node.name=es03
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es01,es02
+      - cluster.initial_master_nodes=es01,es02,es03
+      - bootstrap.memory_lock=true
+      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data03:/usr/share/elasticsearch/data
+    networks:
+      - elastic
+
+volumes:
+  data01:
+    driver: local
+  data02:
+    driver: local
+  data03:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge
+</code></pre>
+<p>Run <code>docker-compose</code> to bring up the cluster:</p>
+<pre><code class="sh">docker-compose up
 </code></pre>
 
     </div>
