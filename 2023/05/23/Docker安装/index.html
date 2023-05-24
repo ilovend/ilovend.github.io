@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E8%BF%90%E7%BB%B4%E9%85%8D%E7%BD%AE/" style="color: #00a596">运维配置</a>
+                <a href="/tags/%E8%BF%90%E7%BB%B4%E9%85%8D%E7%BD%AE/" style="color: #ff7d73">运维配置</a>
             </span>
             
         </span>
@@ -173,16 +173,34 @@
     </div>
     
     <div class="content" v-pre>
-        <p>使用 apt 存储库安装<br>在新主机上首次安装 Docker 引擎之前，您需要 需要设置 Docker 存储库。之后，您可以安装和更新 存储库中的 Docker。</p>
-<p>设置存储库<br>更新软件包索引并安装软件包以允许使用 基于 HTTPS 的存储库：aptapt</p>
-<p> sudo apt-get update<br> sudo apt-get install ca-certificates curl gnupg<br>添加 Docker 的官方 GPG 密钥：</p>
-<p> sudo install -m 0755 -d &#x2F;etc&#x2F;apt&#x2F;keyrings<br> curl -fsSL <a target="_blank" rel="noopener" href="https://download.docker.com/linux/ubuntu/gpg">https://download.docker.com/linux/ubuntu/gpg</a> | sudo gpg –dearmor -o &#x2F;etc&#x2F;apt&#x2F;keyrings&#x2F;docker.gpg<br> sudo chmod a+r &#x2F;etc&#x2F;apt&#x2F;keyrings&#x2F;docker.gpg<br>使用以下命令设置存储库：</p>
-<p> echo <br>  “deb [arch&#x3D;”$(dpkg –print-architecture)” signed-by&#x3D;&#x2F;etc&#x2F;apt&#x2F;keyrings&#x2F;docker.gpg] <a target="_blank" rel="noopener" href="https://download.docker.com/linux/ubuntu">https://download.docker.com/linux/ubuntu</a> <br>  “$(. &#x2F;etc&#x2F;os-release &amp;&amp; echo “$VERSION_CODENAME”)” stable” | <br>  sudo tee &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;docker.list &gt; &#x2F;dev&#x2F;null<br>安装 Docker 引擎<br>更新包索引：apt</p>
-<p> sudo apt-get update<br>安装 Docker Engine、containerd 和 Docker Compose。</p>
+        <h2 id="使用-apt-存储库安装"><a href="#使用-apt-存储库安装" class="headerlink" title="使用 apt 存储库安装"></a>使用 apt 存储库安装</h2><p>在新主机上首次安装 Docker 引擎之前，您需要 需要设置 Docker 存储库。之后，您可以安装和更新 存储库中的 Docker。</p>
+<h3 id="设置存储库"><a href="#设置存储库" class="headerlink" title="设置存储库"></a>设置存储库</h3><p>更新软件包索引并安装软件包以允许使用 基于 HTTPS 的存储库：apt</p>
+<pre><code class="bash">sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+</code></pre>
+<p>添加 Docker 的官方 GPG 密钥：</p>
+<pre><code class="bash">sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+</code></pre>
+<p>使用以下命令设置存储库：</p>
+<pre><code class="bash">echo \
+  &quot;deb [arch=&quot;$(dpkg --print-architecture)&quot; signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  &quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;)&quot; stable&quot; | \
+  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</code></pre>
+<h3 id="安装-Docker-引擎"><a href="#安装-Docker-引擎" class="headerlink" title="安装 Docker 引擎"></a>安装 Docker 引擎</h3><p>更新包索引：apt</p>
+<pre><code class="bash">sudo apt-get update
+</code></pre>
+<p>安装 Docker Engine、containerd 和 Docker Compose。</p>
 <p>最近的<br>特定版本</p>
 <p>要安装最新版本，请运行：</p>
-<p> sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin<br>通过运行映像验证 Docker 引擎安装是否成功。hello-world</p>
-<p> sudo docker run hello-world<br>此命令下载测试映像并在容器中运行它。当 容器运行，它会打印确认消息并退出。</p>
+<pre><code class="bash">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+</code></pre>
+<p>通过运行映像验证 Docker 引擎安装是否成功。hello-world</p>
+<pre><code class="bash">sudo docker run hello-world
+</code></pre>
+<p>此命令下载测试映像并在容器中运行它。当 容器运行，它会打印确认消息并退出。</p>
 <p>您现在已成功安装并启动 Docker 引擎。</p>
 
     </div>

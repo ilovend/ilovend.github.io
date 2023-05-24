@@ -3,7 +3,7 @@
 <html lang="zh_CN">
     <head>
         <meta charset="utf-8" />
-        <title>项目一苍穹外卖问题 | ilovend的博客</title>
+        <title>elasticsearch安装 | ilovend的博客</title>
         <meta name="author" content="ilovend" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -147,14 +147,14 @@
                 <div id="main" v-show="!loading">
                     <div class="article">
     <div>
-        <h1>项目一苍穹外卖问题</h1>
+        <h1>elasticsearch安装</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/5/5
+            2023/5/24
         </span>
         
         
@@ -165,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%86%85%E5%AE%B9/" style="color: #00bcd4">项目内容</a>
+                <a href="/tags/%E9%83%A8%E7%BD%B2%E8%BF%90%E7%BB%B4/" style="color: #03a9f4">部署运维</a>
             </span>
             
         </span>
@@ -173,168 +173,40 @@
     </div>
     
     <div class="content" v-pre>
-        <ol>
-<li><p>POI的作用是什么？</p>
-</li>
-<li><p>如果要获取一个30天内数据，时间这块你是怎么处理的呢？</p>
-</li>
-<li><p>使用POI实现报表导出的流程是什么？</p>
-</li>
-<li><p>使用POI实现数据的导入流程是什么？</p>
-</li>
-<li><p>如果想要在数据库按照指定格式存储日期，这边需要添加什么注解呢？</p>
-</li>
-<li><p>在项目中pojo、vo、dto分别封装什么数据？</p>
-</li>
-<li><p>使用IO的时候，我们什么情况下需要使用flush()方法进行数据刷新？</p>
-</li>
-<li><p>瑞吉外卖的后台数据统计，主要统计了什么内容？</p>
-</li>
-<li><p>说下使用ECharts如何实现折线图，饼状图，矩形图？</p>
-</li>
-<li><p>如果要做订单统计，我们需要实现哪些接口？如何去计算有效订单和订单完成率呢？</p>
-</li>
-<li><p>如何在做统计的时候，我们还要获取一整天的时间该如何获取呢？</p>
-</li>
-<li><p>在Mapper层查找数据的，针对多条件查询，你这边是怎么处理的呢？为什么使用map进行数据组装呢？</p>
-</li>
-<li><p>获取商品销售前10的数据的SQL语句怎么写？</p>
-</li>
-<li><p>你用过任务调度框架吗？可以用到哪些地方呢？</p>
-</li>
-<li><p>orn表达式有没有用过，怎么使用的呢？</p>
-</li>
-<li><p>在项目中用户订单状态如何修改呢？</p>
-</li>
-<li><p>如何实现15分钟后提示支付失败，自动取消功能呢？</p>
-</li>
-<li><p>订单状态定时处理(支付超时或者派送中)，你在项目中是如何处理的呢？</p>
-</li>
-<li><p>ebSocket有了解过吗？主要应用于哪些场景，你在项目中用到过吗？</p>
-</li>
-<li><p>为什么在来电提醒的时候要使用webSocket？</p>
-</li>
-<li><p>使用webSocket怎么实现来电提醒？</p>
-</li>
-<li><p>使用websocket怎么实现催单提醒呢？</p>
-</li>
-<li><p>根据id修改用户地址的SQL语句怎么实现呢？</p>
-</li>
-<li><p>查询默认地址的sql语句怎么写？</p>
-</li>
-<li><p>说下查询当前用户的所有信息如何实现？</p>
-</li>
-<li><p>TO中数据的封装是根据什么进行定义的呢？</p>
-</li>
-<li><p>请说下用户下单功能的实现？</p>
-</li>
-<li><p>订单插入的时候为什么使用useGeneratedKeys&#x3D;”true” keyProperty&#x3D;”id”？</p>
-</li>
-<li><p>如何调用商户系统呢？</p>
-</li>
-<li><p>说下订单支付的流程？</p>
-</li>
-<li><p>说下用户下单实现的过程？为什么在插入订单的同时还要向明细表中插入数据呢？为什么每次订单插入成功之后都要清空购物车呢？</p>
-</li>
-<li><p>支付功能有涉及吗？简单说下你们项目中的支付过程</p>
-</li>
-<li><p>使用微信支付的时候，你是如何确保数据安全的呢？</p>
-</li>
-<li><p>菜品查询是你负责实现的吗？这块为什么要使用缓存还实现呢？</p>
-</li>
-<li><p>为什么在项目中要对菜品和套餐进行缓存呢？说下使用Redis缓存菜品的过程？</p>
-</li>
-<li><p>edis在项目中哪些地方使用呢？</p>
-</li>
-<li><p>购物车功能是你负责实现的吗？请讲一下购物车的实现逻辑？</p>
-</li>
-<li><p>如何删除购物车中所有的菜品呢？</p>
-</li>
-<li><p>你对HttpClient有了解吗？</p>
-</li>
-<li><p>微信登录实现的过程讲讲？</p>
-</li>
-<li><p>项目中有没有用到拦截器，怎么使用的呢？</p>
-</li>
-<li><p>使用拦截器进行拦截的时候如何设置对那些资源进行放行呢？</p>
-</li>
-<li><p>Redis的数据类型有几种，最常用的是哪些？你在项目中用到了哪些Redis的数据类型？</p>
-</li>
-<li><p>什么是功能测试？如何做功能测试？</p>
-</li>
-<li><p>什么是公共字段？如何实现公共字段的填充？</p>
-</li>
-<li><p>文件上传做过吗？如何实现呢？</p>
-</li>
-<li><p>如果要实现批量插入多个口味，SQL语句如何实现呢？</p>
-</li>
-<li><p>菜品删除的业务思路讲讲？删除一个菜品有哪些限制条件呢？</p>
-</li>
-<li><p>更新菜品的时候，对于菜品口味是怎么处理的呢？</p>
-</li>
-<li><p>添加员工的时候，你们一般会有哪些限制条件呢？</p>
-</li>
-<li><p>如果给你一个需求，你会怎么开展工作呢？</p>
-</li>
-<li><p>你在上个公司的开发流程是怎么样呢？</p>
-</li>
-<li><p>在上个公司有没有写过接口文档，怎么写的？</p>
-</li>
-<li><p>你们在公司前后端联调，是怎么做的呢？</p>
-</li>
-<li><p>你在项目开发中遇到过什么问题？怎么解决的呢？</p>
-</li>
-<li><p>当用户姓名添加了唯一约束，要求用户名不能重复，你在项目中怎么处理的呢？</p>
-</li>
-<li><p>你在项目中有没有用到ThreadLocal呢？用到哪些地方了呢？</p>
-</li>
-<li><p>ThreadLocal的工作原理你了解吗？</p>
-</li>
-<li><p>提交代码的流程你了解吗？</p>
-</li>
-<li><p>如果提交代码过程中，和别人代码发生冲突，你是如何解决呢？</p>
-</li>
-<li><p>针对于多条件的分页查询，你们在项目中是怎么实现接口的呢？</p>
-</li>
-<li><p>在项目开发中Resultful风格的使用，请简单聊聊。</p>
-</li>
-<li><p>在编辑员工的时候我们如何做到数据回显呢？</p>
-</li>
-<li><p>你们公司的项目开发流程是怎么样的呢？</p>
-</li>
-<li><p>你们公司的人员分配是怎样的呢？</p>
-</li>
-<li><p>你们项目开发中都有哪些环境呢？</p>
-</li>
-<li><p>请简单介绍下你做的这个项目？</p>
-</li>
-<li><p>能谈下你们公司的技术选型吗？</p>
-</li>
-<li><p>使用Nginx如何实现反向代理和负载均衡呢？</p>
-</li>
-<li><p>@RequestBody和@ResponseBody的作用是什么？</p>
-</li>
-<li><p>@RequestParam和@PathVariable的使用场景分别是什么？</p>
-</li>
-<li><p>你们项目中的异常是如何处理的？</p>
-</li>
-<li><p>你们项目中是如何使用git分支的？是否用过bugfix或者hotfix分支?</p>
-</li>
-<li><p>常用的Linux命令有哪些呢？</p>
-</li>
-<li><p>拷贝文件的命令是什么？</p>
-</li>
-<li><p>使用Linux操作文件目录的命令有哪些？</p>
-</li>
-<li><p>编辑文本的命令是什么？</p>
-</li>
-<li><p>查找文件的命令是什么？</p>
-</li>
-<li><p>命令模式 编辑模式 底行模式分别有什么特点如何切换？</p>
-</li>
-<li><p>在一个日志文件中查找一个异常使用什么命令?</p>
-</li>
-</ol>
+        <h1 id="elasticsearch安装"><a href="#elasticsearch安装" class="headerlink" title="elasticsearch安装"></a>elasticsearch安装</h1><h2 id="安装elasticsearch和kibana"><a href="#安装elasticsearch和kibana" class="headerlink" title="安装elasticsearch和kibana"></a>安装elasticsearch和kibana</h2><pre><code class="bash">docker pull elasticsearch:7.12.1
+docker pull kibana:7.12.1
+</code></pre>
+<h2 id="启动elasticsearch"><a href="#启动elasticsearch" class="headerlink" title="启动elasticsearch"></a>启动elasticsearch</h2><pre><code class="bash">docker run -d \
+    --name es \
+    -e &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot; \
+    -e &quot;discovery.type=single-node&quot; \
+    -v es-data:/usr/share/elasticsearch/data \
+    -v es-plugins:/usr/share/elasticsearch/plugins \
+    --privileged \
+    --network es-net \
+    -p 9200:9200 \
+    -p 9300:9300 \
+elasticsearch:7.12.1
+</code></pre>
+<h2 id="启动kibana"><a href="#启动kibana" class="headerlink" title="启动kibana"></a>启动kibana</h2><pre><code class="bash">docker run -d \
+--name kibana \
+-e ELASTICSEARCH_HOSTS=http://es:9200 \
+--network=es-net \
+-p 5601:5601  \
+kibana:7.12.1
+</code></pre>
+<h2 id="安装ik分词器"><a href="#安装ik分词器" class="headerlink" title="安装ik分词器"></a>安装ik分词器</h2><pre><code class="bash"># 进入容器内部
+docker exec -it elasticsearch /bin/bash
+
+# 在线下载并安装
+./bin/elasticsearch-plugin  install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.12.1/elasticsearch-analysis-ik-7.12.1.zip
+
+#退出
+exit
+
+#重启容器
+docker restart elasticsearch
+</code></pre>
 
     </div>
     
