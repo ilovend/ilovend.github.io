@@ -1,0 +1,1383 @@
+
+<!DOCTYPE html>
+<html lang="zh_CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>day01-环境搭建、SpringCloud微服务(注册发现、网关) | ilovend的博客</title>
+        <meta name="author" content="ilovend" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>ILOVEND的博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;ILOVEND的博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>day01-环境搭建、SpringCloud微服务(注册发现、网关)</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/3
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="环境搭建、SpringCloud微服务-注册发现、服务调用、网关"><a href="#环境搭建、SpringCloud微服务-注册发现、服务调用、网关" class="headerlink" title="环境搭建、SpringCloud微服务(注册发现、服务调用、网关)"></a>环境搭建、SpringCloud微服务(注册发现、服务调用、网关)</h1><h2 id="1-项目概述"><a href="#1-项目概述" class="headerlink" title="1)项目概述"></a>1)项目概述</h2><h3 id="1-1-能让你收获什么"><a href="#1-1-能让你收获什么" class="headerlink" title="1.1)能让你收获什么"></a>1.1)能让你收获什么</h3><p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210407203902473.png" alt="image-20210407203902473"></p>
+<h3 id="1-2-项目课程大纲"><a href="#1-2-项目课程大纲" class="headerlink" title="1.2)项目课程大纲"></a>1.2)项目课程大纲</h3><table>
+<thead>
+<tr>
+<th><strong>章节</strong></th>
+<th><strong>概述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>day01-环境搭建、SpringCloud微服务(注册发现、网关)</td>
+<td>项目介绍、环境搭建、初始工程导入、登录网关实现、接口工具</td>
+</tr>
+<tr>
+<td>day02-app端文章查看，静态化freemarker,分布式文件系统minIO</td>
+<td>app端文章列表加载，水平分表、freemarker、minio、文章详情实现</td>
+</tr>
+<tr>
+<td>day03-自媒体文章发布</td>
+<td>自媒体素材管理、自媒体文章管理</td>
+</tr>
+<tr>
+<td>day04-自媒体文章审核</td>
+<td>自媒体文章发布之后审核文章、第三方接口、雪花算法、代码优化（创建者设计模式）</td>
+</tr>
+<tr>
+<td>day05-自管理敏感词审核&amp;分布式事务&amp;kafka</td>
+<td>自管理敏感词、图片识别文字审核、分布式事务seata集成、kafka入门、kafka高可用配置、springboot集成kafka、自媒体文章上下架、自动生成文章详情页</td>
+</tr>
+<tr>
+<td>day06-延迟队列精确发布文章</td>
+<td>延迟队列服务搭建、redis的实现延迟队列方案、redis分布式锁、redis管道流</td>
+</tr>
+<tr>
+<td>day07&amp;day08&amp;day09-项目实战</td>
+<td>平台管理；app用户行为、用户评论；自媒体端评论管理、数据统计</td>
+</tr>
+<tr>
+<td>day10-app端文章搜索</td>
+<td>app端文章搜索、索引的创建和同步、搜索历史的管理、xxl-job</td>
+</tr>
+<tr>
+<td>day11-热点文章计算</td>
+<td>热点文章计算-定时计算、kafkaStream入门、热点文章计算-实时计算</td>
+</tr>
+<tr>
+<td>day12-项目部署 持续集成发布Jenkins+Git+Docker</td>
+<td>项目开发模式，jenkins概述、部署环境准备、微服务集成dockerfile部署、jenkins+git+dockerfile自动化部署、skywalking链路追踪</td>
+</tr>
+</tbody></table>
+<h3 id="1-3-项目概述"><a href="#1-3-项目概述" class="headerlink" title="1.3)项目概述"></a>1.3)项目概述</h3><p>随着智能手机的普及，人们更加习惯于通过手机来看新闻。由于生活节奏的加快，很多人只能利用碎片时间来获取信息，因此，对于移动资讯客户端的需求也越来越高。黑马头条项目正是在这样背景下开发出来。黑马头条项目采用当下火热的微服务+大数据技术架构实现。本项目主要着手于获取最新最热新闻资讯，通过大数据分析用户喜好精确推送咨询新闻</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210407204320559.png" alt="image-20210407204320559"></p>
+<h3 id="1-4-项目术语"><a href="#1-4-项目术语" class="headerlink" title="1.4)项目术语"></a>1.4)项目术语</h3><p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210407204345614.png" alt="image-20210407204345614"></p>
+<ul>
+<li>app端：一般用户操作查看，可供用户浏览、搜索文章。也可对文章进行点赞评论等</li>
+<li>自媒体端：自媒体人登录系统，可发布管理文章</li>
+<li>平台管理端：黑马头条运营方，主要包括了，内容审核，查看报表，监控系统等</li>
+</ul>
+<h3 id="1-5-业务说明"><a href="#1-5-业务说明" class="headerlink" title="1.5)业务说明"></a>1.5)业务说明</h3><p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210407204405774.png" alt="image-20210407204405774"></p>
+<p>项目演示地址：</p>
+<ul>
+<li><p>平台管理：<a target="_blank" rel="noopener" href="http://heima-admin-java.itheima.net/">http://heima-admin-java.itheima.net</a> </p>
+</li>
+<li><p>自媒体：<a target="_blank" rel="noopener" href="http://heima-wemedia-java.itheima.net/">http://heima-wemedia-java.itheima.net</a> </p>
+</li>
+<li><p>app端：<a target="_blank" rel="noopener" href="http://heima-app-java.itheima.net/">http://heima-app-java.itheima.net</a></p>
+</li>
+</ul>
+<p>平台管理与自媒体为PC端，用电脑浏览器打开即可。</p>
+<p>其中app端为移动端，打开方式有两种：                                                 </p>
+<ul>
+<li><p>谷歌浏览器打开，调成移动端模式                      </p>
+</li>
+<li><p>手机浏览器打开或扫描右侧二维码</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20220621184410219.png" alt="image-20220621184410219"></p>
+</li>
+</ul>
+<h3 id="1-6-技术栈"><a href="#1-6-技术栈" class="headerlink" title="1.6)技术栈"></a>1.6)技术栈</h3><p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cf3accd2ba01c41b0a9ac98370241eba3.png" alt="img"></p>
+<ul>
+<li>采用SpringBoot+Springcloud+Nacos微服务架构</li>
+<li>采用静态模板技术解决页面快速加载</li>
+<li>使用分布式式文件系统MinIO存储海量图片和文件</li>
+<li>使用延迟队列解决方案解决文章定时发布</li>
+<li>使用Redis分布式锁解决线程抢占执行问题</li>
+<li>采用异步线程池解决代码耦合性高的问题</li>
+<li>采用kafka作为消息中间件系统耦合和削峰填谷</li>
+<li>采用敏感词过滤DFA过滤文章中的敏感词</li>
+<li>采用Tess4j图片文章识别识别图片中的文字</li>
+<li>采用数据库锁-乐观锁来控制并发下的数据修改问题</li>
+<li>采用ElasticSearch海量搜索完成项目中的数据搜索</li>
+<li>采用分布式调度任务Xxl-job完成定时任务的执行</li>
+<li>采用Kafka Stream 实时流计算来完成热数据的计算</li>
+<li>采用Jenkins+Docker+Git完成微服务项目的持续集成</li>
+</ul>
+<h3 id="1-7-前后端开发模式"><a href="#1-7-前后端开发模式" class="headerlink" title="1.7)前后端开发模式"></a>1.7)前后端开发模式</h3><p>项目基于前后端分离的架构进行开发，前后端分离架构总体上包括前端和服务端，通常是多人协作开发</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20220303095513482.png" alt="image-20220303095513482"></p>
+<ul>
+<li><p>前后端分离开发基于<strong>HTTP+JSON</strong>交互</p>
+</li>
+<li><p>通过接口文档（API文档）定义规范</p>
+</li>
+<li><p>前后端按照文档定义请求及响应数据</p>
+</li>
+</ul>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20220303095604599.png" alt="image-20220303095604599"></p>
+<p>接口文档分了4部分</p>
+<p>1.请求方式：新增(POST)、修改(PUT)、删除(DELETE)、获取(GET)</p>
+<p>2.URI：请求路径，例如：<a target="_blank" rel="noopener" href="http://localhost:9000/user/login">http://localhost:9000/user/login</a></p>
+<p>3.请求参数（参考资料中的示例）</p>
+<p>4.返回参数（参考资料中的示例）</p>
+<h2 id="2-初始环境搭建"><a href="#2-初始环境搭建" class="headerlink" title="2)初始环境搭建"></a>2)初始环境搭建</h2><h3 id="2-1-虚拟机镜像准备"><a href="#2-1-虚拟机镜像准备" class="headerlink" title="2.1)虚拟机镜像准备"></a>2.1)虚拟机镜像准备</h3><p>1)打开当天资料文件中的镜像，拷贝到一个地方，然后解压</p>
+<p>2)解压后，双击ContOS7-hmtt.vmx文件，前提是电脑上已经安装了VMware</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20210407205305080-16463811882974.png" alt="image-20210407205305080"></p>
+<ol start="3">
+<li>修改虚拟网络地址（NAT）</li>
+</ol>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20210407205325182-16463811882962.png" alt="image-20210407205325182"></p>
+<p>​		                                                        ①，选中VMware中的编辑</p>
+<p>​		                                                        ②，选择虚拟网络编辑器</p>
+<p>​		                                                        ③，找到NAT网卡，把网段改为200（当前挂载的虚拟机已固定ip地址）</p>
+<p>4)修改虚拟机的网络模式为NAT</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20210407205431849-16463811882973.png" alt="image-20210407205431849"></p>
+<p>5)启动虚拟机，<strong>用户名：root  密码：itcast</strong>，当前虚拟机的ip已手动固定（静态IP）, 地址为：<strong>192.168.200.130</strong></p>
+<p>6)使用FinalShell客户端链接</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20210407205502305-16463811882975.png" alt="image-20210407205502305"></p>
+<h3 id="2-2-nacos安装"><a href="#2-2-nacos安装" class="headerlink" title="2.2)nacos安装"></a>2.2)nacos安装</h3><p>①：docker拉取镜像 </p>
+<pre><code class="shell">docker pull nacos/nacos-server:1.4.1
+</code></pre>
+<p>②：创建容器</p>
+<pre><code class="shell">docker run --env MODE=standalone --name nacos --restart=always  -d -p 8848:8848 nacos/nacos-server:1.4.1
+</code></pre>
+<ul>
+<li><p>MODE&#x3D;standalone 单机版</p>
+</li>
+<li><p>–restart&#x3D;always 开机启动</p>
+</li>
+<li><p>-p 8848:8848  映射端口</p>
+</li>
+<li><p>-d 创建一个守护式容器在后台运行</p>
+</li>
+</ul>
+<p>③：访问地址：<a target="_blank" rel="noopener" href="http://192.168.200.130:8848/nacos">http://192.168.200.130:8848/nacos</a> </p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20210412141353694-16463811882976.png" alt="image-20210412141353694"></p>
+<h3 id="2-3Mysql安装"><a href="#2-3Mysql安装" class="headerlink" title="2.3Mysql安装"></a>2.3Mysql安装</h3><p>①：拉取镜像</p>
+<pre><code class="sh">docker pull mysql:5.7
+</code></pre>
+<p>②：创建容器</p>
+<pre><code class="sh">docker run -p 3306:3306 --restart=always --name  mysql57 \
+-v /opt/mysql/conf:/etc/mysql \
+-v /opt/mysql/logs:/var/log/mysql \
+-v /opt/mysql/data:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=root \
+-d mysql:5.7
+</code></pre>
+<blockquote>
+<p>-v &#x2F;opt&#x2F;mysql&#x2F;conf:&#x2F;etc&#x2F;mysql  mysql中的配置目录映射</p>
+<p>-v &#x2F;opt&#x2F;mysql&#x2F;logs:&#x2F;var&#x2F;log&#x2F;mysql   mysql中的日志存放目录映射</p>
+<p>-v &#x2F;opt&#x2F;mysql&#x2F;data:&#x2F;var&#x2F;lib&#x2F;mysql   mysql中的数据存储目录映射</p>
+<p>-e MYSQL_ROOT_PASSWORD&#x3D;root   mysql的密码设置</p>
+</blockquote>
+<h3 id="2-4-初始工程搭建"><a href="#2-4-初始工程搭建" class="headerlink" title="2.4)初始工程搭建"></a>2.4)初始工程搭建</h3><h4 id="2-4-1-环境准备"><a href="#2-4-1-环境准备" class="headerlink" title="2.4.1)环境准备"></a>2.4.1)环境准备</h4><p>①：项目依赖环境（需提前安装好）</p>
+<ul>
+<li><p>JDK1.8</p>
+</li>
+<li><p>Intellij Idea</p>
+</li>
+<li><p>maven-3.6.1</p>
+</li>
+<li><p>Git</p>
+</li>
+</ul>
+<p>②：拉取初始代码</p>
+<p>gitee地址：<a target="_blank" rel="noopener" href="https://gitee.com/itheim/news-init.git">https://gitee.com/itheim/news-init.git</a></p>
+<p>使用git clone把代码克隆下来，或者直接下载zip压缩包也可以，然后使用idea打开</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20210412141517519-16463811882977.png" alt="image-20210412141517519"></p>
+<p>③：IDEA开发工具配置</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20210412141601018-16463811882978.png" alt="image-20210412141601018"></p>
+<p>设置本地仓库，<strong>建议使用资料中提供好的仓库</strong></p>
+<p>④：设置项目编码格式</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20210412141631441-16463811882979.png" alt="image-20210412141631441"></p>
+<h4 id="2-4-2-主体结构"><a href="#2-4-2-主体结构" class="headerlink" title="2.4.2)主体结构"></a>2.4.2)主体结构</h4><p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20210412141711919-164638118829710.png" alt="image-20210412141711919"></p>
+<p>工程接口详细说明：</p>
+<pre><code class="shell">heima-leadnews  #父工程，统一管理项目依赖，继承springboot
+ - heima-leadnews-basic  #管理基础配置
+    - heima-file-starter  #自定义文件starter
+ - heima-leadnews-common  #项目通用配置，如果全局异常、在线接口工具等
+ - heima-leadnews-feign-api  #feign接口统一定义
+ - heima-leadnews-gateway  #管理网关微服务
+    - heima-leadnews-admin-gateway  #平台管理端网关
+    - heima-leadnews-app-gateway  #app端网关
+    - heima-leadnews-wemedia-gateway  #自媒体端网关
+ - heima-leadnews-model  #定义项目中的实体类、dto类、通用类
+ - heima-leadnews-service  #管理微服务
+    - heima-leadnews-admin  #平台管理端微服务
+    - heima-leadnews-article  #app端文章微服务
+    - heima-leadnews-behavior  #app端用户行为微服务
+    - heima-leadnews-comment  #app端评论微服务
+    - heima-leadnews-schedule  #延迟队列微服务
+    - heima-leadnews-search  #app端搜索微服务
+    - heima-leadnews-user  #app端用户微服务
+    - heima-leadnews-wemedia  #自媒体端微服务
+ - heima-leadnews-test  #管理测试案例
+    - es-init  #elasticSearch批量导入
+    - freemarker-demo  #freemarker测试案例
+    - kafka-demo  #kafka测试案例
+    - minio-demo  #minio测试案例
+    - ...
+ - heima-leadnews-utils  #项目中所有的工具类
+</code></pre>
+<h2 id="3-登录"><a href="#3-登录" class="headerlink" title="3)登录"></a>3)登录</h2><h3 id="3-1-需求分析"><a href="#3-1-需求分析" class="headerlink" title="3.1)需求分析"></a>3.1)需求分析</h3><p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210412141809919.png" alt="image-20210412141809919"></p>
+<ul>
+<li><p>用户点击<strong>开始使用</strong></p>
+<p>登录后的用户权限较大，可以查看，也可以操作（点赞，关注，评论）</p>
+</li>
+<li><p>用户点击<strong>不登录，先看看</strong></p>
+</li>
+</ul>
+<p>​       游客只有查看的权限</p>
+<h3 id="3-2-表结构分析"><a href="#3-2-表结构分析" class="headerlink" title="3.2)表结构分析"></a>3.2)表结构分析</h3><p>关于app端用户相关的内容较多，可以单独设置一个库leadnews_user</p>
+<table>
+<thead>
+<tr>
+<th><strong>表名称</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ap_user</td>
+<td>APP用户信息表</td>
+</tr>
+<tr>
+<td>ap_user_fan</td>
+<td>APP用户粉丝信息表</td>
+</tr>
+<tr>
+<td>ap_user_follow</td>
+<td>APP用户关注信息表</td>
+</tr>
+<tr>
+<td>ap_user_realname</td>
+<td>APP实名认证信息表</td>
+</tr>
+</tbody></table>
+<p>从当前资料中找到对应数据库并导入到mysql中</p>
+<blockquote>
+<p>注意事项：</p>
+<p>黑马头条项目中的所有表结构创建必须使用<strong>mysql5.7以上</strong>的版本，如果本机不是5.7以上的版本，建议使用docker创建mysql容器使用</p>
+</blockquote>
+<p>登录需要用到的是ap_user表，表结构如下：</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210412142006558.png" alt="image-20210412142006558"></p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210412142055047.png" alt="image-20210412142055047"></p>
+<p>项目中的持久层使用的mybatis-plus，一般都使用mybais-plus逆向生成对应的实体类</p>
+<p>app_user表对应的实体类如下：</p>
+<pre><code class="java">package com.heima.model.user.pojos;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * &lt;p&gt;
+ * APP用户信息表
+ * &lt;/p&gt;
+ *
+ * @author itheima
+ */
+@Data
+@TableName(&quot;ap_user&quot;)
+public class ApUser implements Serializable &#123;
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 主键
+     */
+    @TableId(value = &quot;id&quot;, type = IdType.AUTO)
+    private Integer id;
+
+    /**
+     * 密码、通信等加密盐
+     */
+    @TableField(&quot;salt&quot;)
+    private String salt;
+
+    /**
+     * 用户名
+     */
+    @TableField(&quot;name&quot;)
+    private String name;
+
+    /**
+     * 密码,md5加密
+     */
+    @TableField(&quot;password&quot;)
+    private String password;
+
+    /**
+     * 手机号
+     */
+    @TableField(&quot;phone&quot;)
+    private String phone;
+
+    /**
+     * 头像
+     */
+    @TableField(&quot;image&quot;)
+    private String image;
+
+    /**
+     * 0 男
+            1 女
+            2 未知
+     */
+    @TableField(&quot;sex&quot;)
+    private Boolean sex;
+
+    /**
+     * 0 未
+            1 是
+     */
+    @TableField(&quot;is_certification&quot;)
+    private Boolean certification;
+
+    /**
+     * 是否身份认证
+     */
+    @TableField(&quot;is_identity_authentication&quot;)
+    private Boolean identityAuthentication;
+
+    /**
+     * 0正常
+            1锁定
+     */
+    @TableField(&quot;status&quot;)
+    private Boolean status;
+
+    /**
+     * 0 普通用户
+            1 自媒体人
+            2 大V
+     */
+    @TableField(&quot;flag&quot;)
+    private Short flag;
+
+    /**
+     * 注册时间
+     */
+    @TableField(&quot;created_time&quot;)
+    private Date createdTime;
+
+&#125;
+</code></pre>
+<p>手动加密（md5+随机字符串）</p>
+<p>md5是不可逆加密，md5相同的密码每次加密都一样，不太安全。在md5的基础上手动加盐（salt）处理</p>
+<p>注册-&gt;生成盐</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210412142315248.png" alt="image-20210412142315248"></p>
+<p>登录-&gt;使用盐来配合验证</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210412142428499.png" alt="image-20210412142428499"></p>
+<h3 id="3-3-思路分析"><a href="#3-3-思路分析" class="headerlink" title="3.3)思路分析"></a>3.3)思路分析</h3><p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210412142536782.png" alt="image-20210412142536782"></p>
+<p>1，用户输入了用户名和密码进行登录，校验成功后返回jwt(基于当前用户的id生成)</p>
+<p>2，用户游客登录，生成jwt返回(基于默认值0生成)</p>
+<h3 id="3-4-app用户微服务搭建"><a href="#3-4-app用户微服务搭建" class="headerlink" title="3.4)app用户微服务搭建"></a>3.4)<strong>app用户微服务搭建</strong></h3><p>在heima-leadnews-service下创建工程heima-leadnews-user</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210412142706443.png" alt="image-20210412142706443"></p>
+<p>引导类</p>
+<pre><code class="java">package com.heima.user;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+@SpringBootApplication
+@EnableDiscoveryClient
+@MapperScan(&quot;com.heima.user.mapper&quot;)
+public class UserApplication &#123;
+
+    public static void main(String[] args) &#123;
+        SpringApplication.run(UserApplication.class,args);
+    &#125;
+&#125;
+</code></pre>
+<p>bootstrap.yml</p>
+<blockquote>
+<p>问答：为什么要使用bootstrap.yml，而不是application.yml或application.properties文件？</p>
+</blockquote>
+<pre><code class="yaml">server:
+  port: 51801
+spring:
+  application:
+    name: leadnews-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+      config:
+        server-addr: 192.168.200.130:8848
+        file-extension: yml
+</code></pre>
+<p>在nacos中创建配置文件:leadnews-user.yml</p>
+<blockquote>
+<p>问答：nacos中创建的服务名称规范是什么？</p>
+</blockquote>
+<pre><code class="yaml">spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.200.130:3306/leadnews_user?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;useSSL=false
+    username: root
+    password: root
+# 设置Mapper接口所对应的XML文件位置，如果你在Mapper接口中有自定义方法，需要进行该配置
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  # 设置别名包扫描路径，通过该属性可以给包中的类注册别名
+  type-aliases-package: com.heima.model.user.pojos
+</code></pre>
+<p>logback.xml</p>
+<blockquote>
+<p>通常在开发阶段需要加入日志文件，并且日志级别为debug，在生产环境下通常是info级别</p>
+<p><strong>debug</strong>：指出细粒度信息事件对调试应用程序是非常有帮助的，主要用于开发过程中打印一些运行信息</p>
+<p><strong>info</strong>：消息在粗粒度级别上突出强调应用程序的运行过程。打印一些你感兴趣的或者重要的信息，这个可以用于生产环境中输出程序运行的一些重要信息，但是不能滥用，避免打印过多的日志。</p>
+</blockquote>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+&lt;configuration&gt;
+    &lt;!--定义日志文件的存储地址,使用绝对路径--&gt;
+    &lt;property name=&quot;LOG_HOME&quot; value=&quot;e:/logs&quot;/&gt;
+
+    &lt;!-- Console 输出设置 --&gt;
+    &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+        &lt;encoder&gt;
+            &lt;!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--&gt;
+            &lt;pattern&gt;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;
+            &lt;charset&gt;utf8&lt;/charset&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
+
+    &lt;!-- 按照每天生成日志文件 --&gt;
+    &lt;appender name=&quot;FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;
+            &lt;!--日志文件输出的文件名--&gt;
+            &lt;fileNamePattern&gt;$&#123;LOG_HOME&#125;/leadnews.%d&#123;yyyy-MM-dd&#125;.log&lt;/fileNamePattern&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;36&#125; - %msg%n&lt;/pattern&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
+
+    &lt;!-- 异步输出 --&gt;
+    &lt;appender name=&quot;ASYNC&quot; class=&quot;ch.qos.logback.classic.AsyncAppender&quot;&gt;
+        &lt;!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 --&gt;
+        &lt;discardingThreshold&gt;0&lt;/discardingThreshold&gt;
+        &lt;!-- 更改默认的队列的深度,该值会影响性能.默认值为256 --&gt;
+        &lt;queueSize&gt;512&lt;/queueSize&gt;
+        &lt;!-- 添加附加的appender,最多只能添加一个 --&gt;
+        &lt;appender-ref ref=&quot;FILE&quot;/&gt;
+    &lt;/appender&gt;
+
+
+    &lt;logger name=&quot;org.apache.ibatis.cache.decorators.LoggingCache&quot; level=&quot;DEBUG&quot; additivity=&quot;false&quot;&gt;
+        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;
+    &lt;/logger&gt;
+    &lt;logger name=&quot;org.springframework.boot&quot; level=&quot;debug&quot;/&gt;
+    &lt;root level=&quot;info&quot;&gt;
+        &lt;!--&lt;appender-ref ref=&quot;ASYNC&quot;/&gt;--&gt;
+        &lt;appender-ref ref=&quot;FILE&quot;/&gt;
+        &lt;appender-ref ref=&quot;CONSOLE&quot;/&gt;
+    &lt;/root&gt;
+&lt;/configuration&gt;
+</code></pre>
+<h3 id="3-5-登录功能实现"><a href="#3-5-登录功能实现" class="headerlink" title="3.5)登录功能实现"></a>3.5)登录功能实现</h3><p>①：接口定义</p>
+<pre><code class="java">@RestController
+@RequestMapping(&quot;/api/v1/login&quot;)
+public class ApUserLoginController &#123;
+
+    @PostMapping(&quot;/login_auth&quot;)
+    public ResponseResult login(@RequestBody LoginDto dto) &#123;
+        return null;
+    &#125;
+&#125;
+</code></pre>
+<p>LoginDto</p>
+<pre><code class="java">package com.heima.model.user.dtos;
+
+import lombok.Data;
+
+@Data
+public class LoginDto &#123;
+    /**
+     *  手机号
+     */
+    private String phone;
+    /**
+     *  密码
+     */
+    private String password;
+&#125;
+</code></pre>
+<p>②：持久层mapper</p>
+<pre><code class="java">package com.heima.user.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.heima.model.user.pojos.ApUser;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ApUserMapper extends BaseMapper&lt;ApUser&gt; &#123;
+&#125;
+</code></pre>
+<p>③：业务层service</p>
+<pre><code class="java">package com.heima.user.service;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.heima.model.common.dtos.ResponseResult;
+import com.heima.model.user.dtos.LoginDto;
+import com.heima.model.user.pojos.ApUser;
+
+public interface ApUserService extends IService&lt;ApUser&gt;&#123;
+
+    /**
+     * app端登录
+     * @param dto
+     * @return
+     */
+    public ResponseResult login(LoginDto dto);
+    
+&#125;
+</code></pre>
+<p>实现类：</p>
+<pre><code class="java">package com.heima.user.service.impl;
+
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.heima.model.common.dtos.ResponseResult;
+import com.heima.model.common.enums.AppHttpCodeEnum;
+import com.heima.model.user.dtos.LoginDto;
+import com.heima.model.user.pojos.ApUser;
+import com.heima.user.mapper.ApUserMapper;
+import com.heima.user.service.ApUserService;
+import com.heima.utils.common.AppJwtUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+@Service
+public class ApUserServiceImpl extends ServiceImpl&lt;ApUserMapper, ApUser&gt; implements ApUserService &#123;
+
+    @Override
+    public ResponseResult login(LoginDto dto) &#123;
+
+        //1.正常登录（手机号+密码登录）
+        if (!StringUtils.isBlank(dto.getPhone()) &amp;&amp; !StringUtils.isBlank(dto.getPassword())) &#123;
+            //1.1查询用户
+            ApUser apUser = getOne(Wrappers.&lt;ApUser&gt;lambdaQuery().eq(ApUser::getPhone, dto.getPhone()));
+            if (apUser == null) &#123;
+                return ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_EXIST,&quot;用户不存在&quot;);
+            &#125;
+
+            //1.2 比对密码
+            String salt = apUser.getSalt();
+            String pswd = dto.getPassword();
+            pswd = DigestUtils.md5DigestAsHex((pswd + salt).getBytes());
+            if (!pswd.equals(apUser.getPassword())) &#123;
+                return ResponseResult.errorResult(AppHttpCodeEnum.LOGIN_PASSWORD_ERROR);
+            &#125;
+            //1.3 返回数据  jwt
+            Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();
+            map.put(&quot;token&quot;, AppJwtUtil.getToken(apUser.getId().longValue()));
+            apUser.setSalt(&quot;&quot;);
+            apUser.setPassword(&quot;&quot;);
+            map.put(&quot;user&quot;, apUser);
+            return ResponseResult.okResult(map);
+        &#125; else &#123;
+            //2.游客  同样返回token  id = 0
+            Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();
+            map.put(&quot;token&quot;, AppJwtUtil.getToken(0l));
+            return ResponseResult.okResult(map);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>④：控制层controller</p>
+<pre><code class="java">package com.heima.user.controller.v1;
+
+import com.heima.model.common.dtos.ResponseResult;
+import com.heima.model.user.dtos.LoginDto;
+import com.heima.user.service.ApUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(&quot;/api/v1/login&quot;)
+public class ApUserLoginController &#123;
+
+    @Autowired
+    private ApUserService apUserService;
+
+    @PostMapping(&quot;/login_auth&quot;)
+    public ResponseResult login(@RequestBody LoginDto dto) &#123;
+        return apUserService.login(dto);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="3-6-接口测试工具"><a href="#3-6-接口测试工具" class="headerlink" title="3.6)接口测试工具"></a>3.6)接口测试工具</h3><h4 id="3-6-1-postman"><a href="#3-6-1-postman" class="headerlink" title="3.6.1)postman"></a>3.6.1)postman</h4><p>Postman是一款功能强大的网页调试与发送网页HTTP请求的Chrome插件。postman被500万开发者和超100,000家公司用于每月访问1.3亿个API。</p>
+<p>官方网址：<a target="_blank" rel="noopener" href="https://www.postman.com/">https://www.postman.com/</a></p>
+<p>解压资料文件夹中的软件，安装即可</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210413162511873.png" alt="image-20210413162511873"></p>
+<p>通常的接口测试查看请求和响应，下面是登录请求的测试</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210413162558657.png" alt="image-20210413162558657"></p>
+<h4 id="3-6-2-swagger"><a href="#3-6-2-swagger" class="headerlink" title="3.6.2)swagger"></a>3.6.2)swagger</h4><p>(1)简介</p>
+<p>Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务(<a target="_blank" rel="noopener" href="https://swagger.io/">https://swagger.io/</a>)。 它的主要作用是：</p>
+<ol>
+<li><p>使得前后端分离开发更加方便，有利于团队协作</p>
+</li>
+<li><p>接口的文档在线自动生成，降低后端开发人员编写接口文档的负担</p>
+</li>
+<li><p>功能测试 </p>
+<p>Spring已经将Swagger纳入自身的标准，建立了Spring-swagger项目，现在叫Springfox。通过在项目中引入Springfox ，即可非常简单快捷的使用Swagger。</p>
+</li>
+</ol>
+<p>(2)SpringBoot集成Swagger</p>
+<ul>
+<li><p>引入依赖,在heima-leadnews-model和heima-leadnews-common模块中引入该依赖</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+    &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+    &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+</li>
+</ul>
+<p>只需要在heima-leadnews-common中进行配置即可，因为其他微服务工程都直接或间接依赖即可。</p>
+<ul>
+<li>在heima-leadnews-common工程中添加一个配置类</li>
+</ul>
+<p>新增：com.heima.common.swagger.SwaggerConfiguration</p>
+<pre><code class="java">package com.heima.common.swagger;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@Configuration
+@EnableSwagger2
+public class SwaggerConfiguration &#123;
+
+   @Bean
+   public Docket buildDocket() &#123;
+      return new Docket(DocumentationType.SWAGGER_2)
+              .apiInfo(buildApiInfo())
+              .select()
+              // 要扫描的API(Controller)基础包
+              .apis(RequestHandlerSelectors.basePackage(&quot;com.heima&quot;))
+              .paths(PathSelectors.any())
+              .build();
+   &#125;
+
+   private ApiInfo buildApiInfo() &#123;
+      Contact contact = new Contact(&quot;黑马程序员&quot;,&quot;&quot;,&quot;&quot;);
+      return new ApiInfoBuilder()
+              .title(&quot;黑马头条-平台管理API文档&quot;)
+              .description(&quot;黑马头条后台api&quot;)
+              .contact(contact)
+              .version(&quot;1.0.0&quot;).build();
+   &#125;
+&#125;
+</code></pre>
+<p>在heima-leadnews-common模块中的resources目录中新增以下目录和文件</p>
+<p>文件：resources&#x2F;META-INF&#x2F;Spring.factories</p>
+<pre><code class="java">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.heima.common.swagger.SwaggerConfiguration
+</code></pre>
+<p>（3）Swagger常用注解</p>
+<p>在Java类中添加Swagger的注解即可生成Swagger接口文档，常用Swagger注解如下：</p>
+<p>@Api：修饰整个类，描述Controller的作用  </p>
+<p>@ApiOperation：描述一个类的一个方法，或者说一个接口  </p>
+<p>@ApiParam：单个参数的描述信息  </p>
+<p>@ApiModel：用对象来接收参数  </p>
+<p>@ApiModelProperty：用对象接收参数时，描述对象的一个字段  </p>
+<p>@ApiResponse：HTTP响应其中1个描述  </p>
+<p>@ApiResponses：HTTP响应整体描述  </p>
+<p>@ApiIgnore：使用该注解忽略这个API  </p>
+<p>@ApiError ：发生错误返回的信息  </p>
+<p>@ApiImplicitParam：一个请求参数  </p>
+<p>@ApiImplicitParams：多个请求参数的描述信息</p>
+<p> @ApiImplicitParam属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>取值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>paramType</td>
+<td></td>
+<td>查询参数类型</td>
+</tr>
+<tr>
+<td></td>
+<td>path</td>
+<td>以地址的形式提交数据</td>
+</tr>
+<tr>
+<td></td>
+<td>query</td>
+<td>直接跟参数完成自动映射赋值</td>
+</tr>
+<tr>
+<td></td>
+<td>body</td>
+<td>以流的形式提交 仅支持POST</td>
+</tr>
+<tr>
+<td></td>
+<td>header</td>
+<td>参数在request headers 里边提交</td>
+</tr>
+<tr>
+<td></td>
+<td>form</td>
+<td>以form表单的形式提交 仅支持POST</td>
+</tr>
+<tr>
+<td>dataType</td>
+<td></td>
+<td>参数的数据类型 只作为标志说明，并没有实际验证</td>
+</tr>
+<tr>
+<td></td>
+<td>Long</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td></td>
+<td>接收参数名</td>
+</tr>
+<tr>
+<td>value</td>
+<td></td>
+<td>接收参数的意义描述</td>
+</tr>
+<tr>
+<td>required</td>
+<td></td>
+<td>参数是否必填</td>
+</tr>
+<tr>
+<td></td>
+<td>true</td>
+<td>必填</td>
+</tr>
+<tr>
+<td></td>
+<td>false</td>
+<td>非必填</td>
+</tr>
+<tr>
+<td>defaultValue</td>
+<td></td>
+<td>默认值</td>
+</tr>
+</tbody></table>
+<p>我们在ApUserLoginController中添加Swagger注解，代码如下所示：</p>
+<pre><code class="java">@RestController
+@RequestMapping(&quot;/api/v1/login&quot;)
+@Api(value = &quot;app端用户登录-控制器&quot;)
+public class ApUserLoginController &#123;
+
+    @Autowired
+    private ApUserService apUserService;
+
+    @PostMapping(&quot;/login_auth&quot;)
+    @ApiOperation(&quot;用户登录&quot;)
+    public ResponseResult login(@RequestBody LoginDto dto)&#123;
+        return apUserService.login(dto);
+    &#125;
+&#125;
+</code></pre>
+<p>LoginDto</p>
+<pre><code class="java">@Data
+public class LoginDto &#123;
+
+    /**
+     * 手机号
+     */
+    @ApiModelProperty(value=&quot;手机号&quot;,required = true)
+    private String phone;
+
+    /**
+     * 密码
+     */
+    @ApiModelProperty(value=&quot;密码&quot;,required = true)
+    private String password;
+&#125;
+</code></pre>
+<p>启动user微服务，访问地址：<a target="_blank" rel="noopener" href="http://localhost:51801/swagger-ui.html">http://localhost:51801/swagger-ui.html</a></p>
+<h4 id="3-6-3-knife4j"><a href="#3-6-3-knife4j" class="headerlink" title="3.6.3)knife4j"></a>3.6.3)knife4j</h4><p>(1)简介</p>
+<p>knife4j是为Java MVC框架集成Swagger生成Api文档的增强解决方案,前身是swagger-bootstrap-ui,取名kni4j是希望它能像一把匕首一样小巧,轻量,并且功能强悍!</p>
+<p>gitee地址：<a target="_blank" rel="noopener" href="https://gitee.com/xiaoym/knife4j">https://gitee.com/xiaoym/knife4j</a></p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://doc.xiaominfo.com/">https://doc.xiaominfo.com/</a></p>
+<p>效果演示：<a target="_blank" rel="noopener" href="http://knife4j.xiaominfo.com/doc.html">http://knife4j.xiaominfo.com/doc.html</a></p>
+<p>(2)核心功能</p>
+<p>该UI增强包主要包括两大核心功能：文档说明 和 在线调试</p>
+<ul>
+<li>文档说明：根据Swagger的规范说明，详细列出接口文档的说明，包括接口地址、类型、请求示例、请求参数、响应示例、响应参数、响应码等信息，使用swagger-bootstrap-ui能根据该文档说明，对该接口的使用情况一目了然。</li>
+<li>在线调试：提供在线接口联调的强大功能，自动解析当前接口参数,同时包含表单验证，调用参数可返回接口响应内容、headers、Curl请求命令实例、响应时间、响应状态码等信息，帮助开发者在线调试，而不必通过其他测试工具测试接口是否正确,简介、强大。</li>
+<li>个性化配置：通过个性化ui配置项，可自定义UI的相关显示信息</li>
+<li>离线文档：根据标准规范，生成的在线markdown离线文档，开发者可以进行拷贝生成markdown接口文档，通过其他第三方markdown转换工具转换成html或pdf，这样也可以放弃swagger2markdown组件</li>
+<li>接口排序：自1.8.5后，ui支持了接口排序功能，例如一个注册功能主要包含了多个步骤,可以根据swagger-bootstrap-ui提供的接口排序规则实现接口的排序，step化接口操作，方便其他开发者进行接口对接</li>
+</ul>
+<p>(3)快速集成</p>
+<ul>
+<li>在heima-leadnews-common模块中的<code>pom.xml</code>文件中引入<code>knife4j</code>的依赖,如下：</li>
+</ul>
+<pre><code class="xml">&lt;dependency&gt;
+     &lt;groupId&gt;com.github.xiaoymin&lt;/groupId&gt;
+     &lt;artifactId&gt;knife4j-spring-boot-starter&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<ul>
+<li>创建Swagger配置文件</li>
+</ul>
+<p>在heima-leadnews-common模块中新建配置类</p>
+<p>新建Swagger的配置文件<code>SwaggerConfiguration.java</code>文件,创建springfox提供的Docket分组对象,代码如下：</p>
+<pre><code class="java">package com.heima.common.knife4j;
+
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@Configuration
+@EnableSwagger2
+@EnableKnife4j
+@Import(BeanValidatorPluginsConfiguration.class)
+public class Swagger2Configuration &#123;
+
+    @Bean(value = &quot;defaultApi2&quot;)
+    public Docket defaultApi2() &#123;
+        Docket docket=new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                //分组名称
+                .groupName(&quot;1.0&quot;)
+                .select()
+                //这里指定Controller扫描包路径
+                .apis(RequestHandlerSelectors.basePackage(&quot;com.heima&quot;))
+                .paths(PathSelectors.any())
+                .build();
+        return docket;
+    &#125;
+    private ApiInfo apiInfo() &#123;
+        return new ApiInfoBuilder()
+                .title(&quot;黑马头条API文档&quot;)
+                .description(&quot;黑马头条API文档&quot;)
+                .version(&quot;1.0&quot;)
+                .build();
+    &#125;
+&#125;
+</code></pre>
+<p>以上有两个注解需要特别说明，如下表：</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@EnableSwagger2</code></td>
+<td>该注解是Springfox-swagger框架提供的使用Swagger注解，该注解必须加</td>
+</tr>
+<tr>
+<td><code>@EnableKnife4j</code></td>
+<td>该注解是<code>knife4j</code>提供的增强注解,Ui提供了例如动态参数、参数过滤、接口排序等增强功能,如果你想使用这些增强功能就必须加该注解，否则可以不用加</td>
+</tr>
+</tbody></table>
+<ul>
+<li>添加配置</li>
+</ul>
+<p>在Spring.factories中新增配置</p>
+<pre><code class="java">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.heima.common.swagger.Swagger2Configuration, \
+  com.heima.common.swagger.SwaggerConfiguration
+</code></pre>
+<ul>
+<li>访问</li>
+</ul>
+<p>在浏览器输入地址：<code>http://host:port/doc.html</code></p>
+<h2 id="4-网关"><a href="#4-网关" class="headerlink" title="4)网关"></a>4)网关</h2><h3 id="4-1-网关概述"><a href="#4-1-网关概述" class="headerlink" title="4.1)网关概述"></a>4.1)网关概述</h3><p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20220303102032245.png" alt="image-20220303102032245"></p>
+<p>项目中网关的服务工程结构</p>
+<p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets/image-20220303102107464.png" alt="image-20220303102107464"></p>
+<h3 id="4-2-app端网关搭建"><a href="#4-2-app端网关搭建" class="headerlink" title="4.2)app端网关搭建"></a>4.2)app端网关搭建</h3><p>（1）在heima-leadnews-gateway导入以下依赖</p>
+<p>pom文件</p>
+<pre><code class="xml">&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+     &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-config&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
+        &lt;artifactId&gt;jjwt&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<p>（2）在heima-leadnews-gateway下创建heima-leadnews-app-gateway微服务</p>
+<p>引导类：</p>
+<pre><code class="java">package com.heima.app.gateway;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+@SpringBootApplication
+@EnableDiscoveryClient  //开启注册中心
+public class AppGatewayApplication &#123;
+
+    public static void main(String[] args) &#123;
+        SpringApplication.run(AppGatewayApplication.class,args);
+    &#125;
+&#125;
+</code></pre>
+<p>bootstrap.yml</p>
+<pre><code class="yaml">server:
+  port: 51601
+spring:
+  application:
+    name: leadnews-app-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+      config:
+        server-addr: 192.168.200.130:8848
+        file-extension: yml
+</code></pre>
+<p>在nacos的配置中心创建dataid为leadnews-app-gateway.yml的配置</p>
+<pre><code class="yaml">spring:
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          &#39;[/**]&#39;:
+            allowedHeaders: &quot;*&quot;
+            allowedOrigins: &quot;*&quot;
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - OPTION
+      routes:
+        # 平台管理
+        - id: user
+          uri: lb://leadnews-user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix= 1
+</code></pre>
+<p>环境搭建完成以后，启动项目网关和用户两个服务，使用postman进行测试</p>
+<p>请求地址：<a target="_blank" rel="noopener" href="http://localhost:51601/user/api/v1/login/login_auth">http://localhost:51601/user/api/v1/login/login_auth</a>   </p>
+<h3 id="4-3-全局过滤器实现jwt校验"><a href="#4-3-全局过滤器实现jwt校验" class="headerlink" title="4.3)全局过滤器实现jwt校验"></a>4.3)全局过滤器实现jwt校验</h3><p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210705110434492.png" alt="image-20210705110434492"></p>
+<p>思路分析：</p>
+<ol>
+<li>任何请求过来以后，首先先经过微服务的网关</li>
+<li>判断该请求是否为登录请求，如果是登录请求，则放行</li>
+<li>不是登录请求，则需要校验token<ul>
+<li>判断token是否存在    不存在返回401错误（权限不足，前端会自动跳转到登录页面）</li>
+<li>判断token是否有效（是否过期），无效返回401错误（权限不足，前端会自动跳转到登录页面）</li>
+<li>如果token都是正常的，则路由到具体的微服务进行数据访问</li>
+</ul>
+</li>
+</ol>
+<p>具体实现：</p>
+<p>第一：</p>
+<p>​	在认证过滤器中需要用到jwt的解析，所以需要把工具类拷贝一份到网关微服务</p>
+<p>第二：</p>
+<p>在网关微服务中新建全局过滤器：</p>
+<pre><code class="java">package com.heima.app.gateway.filter;
+
+
+import com.heima.app.gateway.util.AppJwtUtil;
+import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.Ordered;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
+
+@Component
+@Slf4j
+public class AuthorizeFilter implements Ordered, GlobalFilter &#123;
+    @Override
+    public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) &#123;
+        //1.获取request和response对象
+        ServerHttpRequest request = exchange.getRequest();
+        ServerHttpResponse response = exchange.getResponse();
+
+        //2.判断是否是登录
+        if(request.getURI().getPath().contains(&quot;/login&quot;))&#123;
+            //放行
+            return chain.filter(exchange);
+        &#125;
+
+
+        //3.获取token
+        String token = request.getHeaders().getFirst(&quot;token&quot;);
+
+        //4.判断token是否存在
+        if(StringUtils.isBlank(token))&#123;
+            response.setStatusCode(HttpStatus.UNAUTHORIZED);
+            return response.setComplete();
+        &#125;
+
+        //5.判断token是否有效
+        try &#123;
+            Claims claimsBody = AppJwtUtil.getClaimsBody(token);
+            //是否是过期
+            int result = AppJwtUtil.verifyToken(claimsBody);
+            if(result == 1 || result  == 2)&#123;
+                response.setStatusCode(HttpStatus.UNAUTHORIZED);
+                return response.setComplete();
+            &#125;
+        &#125;catch (Exception e)&#123;
+            e.printStackTrace();
+            response.setStatusCode(HttpStatus.UNAUTHORIZED);
+            return response.setComplete();
+        &#125;
+
+        //6.放行
+        return chain.filter(exchange);
+    &#125;
+
+    /**
+     * 优先级设置  值越小  优先级越高
+     * @return
+     */
+    @Override
+    public int getOrder() &#123;
+        return 0;
+    &#125;
+&#125;
+</code></pre>
+<p>测试：</p>
+<p>启动user服务，继续访问其他微服务，会提示需要认证才能访问，这个时候需要在heads中设置设置token才能正常访问。</p>
+<h2 id="5-前端集成"><a href="#5-前端集成" class="headerlink" title="5)前端集成"></a>5)前端集成</h2><h3 id="5-1-前端项目部署思路"><a href="#5-1-前端项目部署思路" class="headerlink" title="5.1)前端项目部署思路"></a>5.1)前端项目部署思路</h3><p><img src="/01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E3%80%81SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1(%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0%E3%80%81%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E3%80%81%E7%BD%91%E5%85%B3).assets%5Cimage-20210416095950485.png" alt="image-20210416095950485"></p>
+<p>通过nginx来进行配置，功能如下</p>
+<ul>
+<li>通过nginx的反向代理功能访问后台的网关资源</li>
+<li>通过nginx的静态服务器功能访问前端静态页面</li>
+</ul>
+<h3 id="5-2-配置nginx"><a href="#5-2-配置nginx" class="headerlink" title="5.2)配置nginx"></a>5.2)配置nginx</h3><p>①：解压资料文件夹中的压缩包nginx-1.18.0.zip</p>
+<p>②：解压资料文件夹中的前端项目app-web.zip</p>
+<p>③：配置nginx.conf文件</p>
+<p>在nginx安装的conf目录下新建一个文件夹<code>leadnews.conf</code>,在当前文件夹中新建<code>heima-leadnews-app.conf</code>文件</p>
+<p>heima-leadnews-app.conf配置如下：</p>
+<pre><code class="javascript">upstream  heima-app-gateway&#123;
+    server localhost:51601;
+&#125;
+
+server &#123;
+    listen 8801;
+    location / &#123;
+        root D:/workspace/app-web/;
+        index index.html;
+    &#125;
+    
+    location ~/app/(.*) &#123;
+        proxy_pass http://heima-app-gateway/$1;
+        proxy_set_header HOST $host;  # 不改变源请求头的值
+        proxy_pass_request_body on;  #开启获取请求体
+        proxy_pass_request_headers on;  #开启获取请求头
+        proxy_set_header X-Real-IP $remote_addr;   # 记录真实发出请求的客户端IP
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  #记录代理信息
+    &#125;
+&#125;
+</code></pre>
+<p>nginx.conf   把里面注释的内容和静态资源配置相关删除，引入heima-leadnews-app.conf文件加载</p>
+<pre><code class="javascript">
+#user  nobody;
+worker_processes  1;
+
+events &#123;
+    worker_connections  1024;
+&#125;
+http &#123;
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+    # 引入自定义配置文件
+    include leadnews.conf/*.conf;
+&#125;
+</code></pre>
+<p>④ ：启动nginx</p>
+<p>​    在nginx安装包中使用命令提示符打开，输入命令nginx启动项目</p>
+<p>​    可查看进程，检查nginx是否启动</p>
+<p>​	重新加载配置文件：<code>nginx -s reload</code></p>
+<p>⑤：打开前端项目进行测试  – &gt;  <a target="_blank" rel="noopener" href="http://localhost:8801/">http://localhost:8801</a></p>
+<p>​     用谷歌浏览器打开，调试移动端模式进行访问</p>
+
+    </div>
+    
+    
+    
+    
+    <div id="comment">
+        <div id="giscus-container" class="giscus"></div>
+    </div>
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 ilovend的博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;ilovend
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+<script
+    src="https://giscus.app/client.js"
+    data-repo="ilovend/ilovend.github.io"
+    data-repo-id="R_kgDOI_VOow"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOI_VOo84CWP7g"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin
+    async
+></script>
+
+
+
+
+
+        
+    </body>
+</html>
